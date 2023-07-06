@@ -45,13 +45,13 @@ class Award(db.Model, SerializerMixin):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, nullable=False)
 
-class BookAward(db.Model, SerializerMixin):
-    __tablename__ = 'book_awards'
+class UserBooks(db.Model, SerializerMixin):
+    __tablename__ = 'user_books'
 
     id = db.Column(db.Integer, primary_key=True)
     book_id = db.Column(db.Integer, db.ForeignKey('books.id'))
     # books = db.relationship
-    award_id = db.Column(db.Integer, db.ForeignKey('awards.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     # awards = db.relationship
 
 
