@@ -40,3 +40,24 @@ Librarified is a hypothetical book store. On the site you will be able to view b
 | /awards/{id}  | Get       | Get an award      | core        |
 
 
+# Client Routes 
+
+| Client Route  | Component           |
+|---------------|---------------------|
+| /             | Home.jsx            |
+| /books        | Books.jsx           |
+| /books/{id}   | Book-Details.jsx    |
+| /authors      | Authors.jsx         |
+| /authors/{id} | Authors-Details.jsx |
+| /profile      | Profile.jsx         |
+| /about        | About.jsx           |
+
+# Wireframes
+
+<img src="./client/assets/home.png">
+<img src="./client/assets/books.png">
+<img src="./client/assets/book-details.png">
+<img src="./client/assets/authors.png">
+<img src="./client/assets/author-details.png">
+<img src="./client/assets/profile.png">
+
