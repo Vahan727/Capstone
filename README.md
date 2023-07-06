@@ -14,7 +14,7 @@ Librarified is a hypothetical book store. On the site you will be able to view b
 
 # Models
 
-<img src="./client/assets/schema.png">
+<img src="./client/assets/schema-tables.png">
 
 # API Endpoints
 
