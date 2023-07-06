@@ -38,6 +38,9 @@ Librarified is a hypothetical book store. On the site you will be able to view b
 | /reviews/{id} | Delete    | Delete a review   | core        |
 | /awards       | Get       | Get all awards    | core        |
 | /awards/{id}  | Get       | Get an award      | core        |
+| /user/books   | Get       | Get user's books  | core        |
+| /user/books   | Post      |Post new user book | core        |
+| /user/books/{id} | Delete | Delete user book  | core        |
 
 
 # Client Routes 
@@ -51,6 +54,10 @@ Librarified is a hypothetical book store. On the site you will be able to view b
 | /authors/{id} | Authors-Details.jsx |
 | /profile      | Profile.jsx         |
 | /about        | About.jsx           |
+
+# React Tree
+
+<img src="./client/assets/tree.png">
 
 # Wireframes
 
