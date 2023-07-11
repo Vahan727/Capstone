@@ -98,11 +98,61 @@ class BookById(Resource):
         return ({}, 204)
     
 
+class Users(Resource):
+    def get(self):
+        users = [u.to_dict() for u in User.query.all()]
+        return users, 200
+    
+    def post(self):
+        data = request.get_json()
+        try:
+            new_user = User(
+                username = data.get('username'),
+                name = data.get('name'),
+                email = data.get('email'),
+                password = data.get('password'),
+            )
+            db.session.add(new_user)
+            db.session.commit()
+            return new_user.to_dict(), 201
+        except:
+            return ({"error": "400: Validation error"}, 400)
+
+class UserById(Resource):
+    def get(self, id):
+        try:
+            user = User.query.filter(User.id == id).first()
+            return user.to_dict(), 200
+        except:
+            return ({"error": "400: Validation error"}, 400)
+        
+    def patch(self, id):
+        data = request.get_json()
+        user = User.query.filter(User.id == id).first()
+        if not user:
+            return ({"error": "404 not found"}, 404)
+        for attr in data:
+            setattr(user, attr, data.get(attr))
+
+        db.session.add(user)
+        db.session.commit()
+        return user.to_dict(), 202
+    
+    def delete(self, id):
+        user = User.query.filter(User.id == id).first()
+        if not user:
+            return ({"error": "404 not found"}, 404)
+        db.session.delete(user)
+        db.session.commit()
+        return ({}, 204)
+
 
 api.add_resource(Authors, "/authors")
 api.add_resource(AuthorById, "/authors/<int:id>")
 api.add_resource(Books, "/books")
 api.add_resource(BookById,"/books/<int:id>")
+api.add_resource(Users, "/users")
+api.add_resource(UserById, "/users/<int:id>")
 
 
 if __name__ == '__main__':
