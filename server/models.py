@@ -42,7 +42,6 @@ class User(db.Model, SerializerMixin):
 
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String, unique=True, nullable=False)
-    name = db.Column(db.String)
     email = db.Column(db.String, unique=True, nullable=False)
     password = db.Column(db.String)
 
@@ -69,7 +68,7 @@ class User(db.Model, SerializerMixin):
     # @validates('email')
     # def validates_email(self, key, email):
     #     if not re.match(r"[^@]+@[^@]+\.[^@]+", email):
-    #         raise ValueError('Invalid email Boss')
+    #         raise ValueError('Invalid Email')
     #     return email
 
     # @hybrid_property

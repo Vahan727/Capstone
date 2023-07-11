@@ -12,6 +12,11 @@ from config import app, db, api
 from models import Author, Book, User, Library
 # Views go here!
 
+class OldestBooks(Resource):
+    def get(self):
+        oldest_books = [o.to_dict() for o in Book.query.order_by(Book.publication_date).limit(5)]
+        return oldest_books, 200
+
 class Authors(Resource):
     def get(self):
         authors = [a.to_dict() for a in Author.query.all()]
@@ -146,13 +151,13 @@ class UserById(Resource):
         db.session.commit()
         return ({}, 204)
 
-
-api.add_resource(Authors, "/authors")
-api.add_resource(AuthorById, "/authors/<int:id>")
-api.add_resource(Books, "/books")
-api.add_resource(BookById,"/books/<int:id>")
-api.add_resource(Users, "/users")
-api.add_resource(UserById, "/users/<int:id>")
+api.add_resource(OldestBooks, "/api/oldest_books")
+api.add_resource(Authors, "/api/authors")
+api.add_resource(AuthorById, "/api/authors/<int:id>")
+api.add_resource(Books, "/api/books")
+api.add_resource(BookById,"/api/books/<int:id>")
+api.add_resource(Users, "/api/users")
+api.add_resource(UserById, "/api/users/<int:id>")
 
 
 if __name__ == '__main__':
