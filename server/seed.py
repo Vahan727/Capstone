@@ -235,28 +235,24 @@ if __name__ == '__main__':
             User (
                 id = 1,
                 username = 'Vahan727',
-                name = 'Vahan Nadj',
                 email = 'vahan@gmail.com',
                 password = 'Password1'
             ),
             User (
                 id = 2, 
                 username = 'User123',
-                name = 'Fake User',
                 email = 'fake@gmail.com',
                 password = 'Password2'
             ),
             User (
                 id = 3, 
                 username = 'User456',
-                name = 'Another User',
                 email = 'another@gmail.com',
                 password = 'Password3'
             ),
             User (
                 id = 4, 
                 username = 'User789',
-                name = 'Definitely User',
                 email = 'definitely@gmail.com',
                 password = 'Password4'
             )
