@@ -12,6 +12,7 @@ flask-restful = "*"
 flask-cors = "*"
 bcrypt = "*"
 honcho = "*"
+gunicorn = "*"
 
 [dev-packages]
 

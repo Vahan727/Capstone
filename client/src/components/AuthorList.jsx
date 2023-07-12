@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import AuthorCard from './AuthorCard'
 
 function AuthorList() {
-    const [author, setAuthor] = useState([]);
+    const [authors, setAuthors] = useState([]);
 
     useEffect(() => {
         fetchAuthors();
@@ -12,7 +12,7 @@ function AuthorList() {
         fetch(`/api/authors`)
         .then(response => response.json())
         .then(data => {
-            setAuthor(data.authors);
+            setAuthors(data.authors);
         })
         .catch(error => console.error(error));
     };
