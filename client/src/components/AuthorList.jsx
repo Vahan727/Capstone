@@ -12,7 +12,7 @@ function AuthorList() {
         fetch(`/api/authors`)
         .then(response => response.json())
         .then(data => {
-            setAuthors(data.authors);
+            setAuthors(data);
         })
         .catch(error => console.error(error));
     };
@@ -30,10 +30,10 @@ function AuthorList() {
     
     return (
         <main className="author">
-            <Search 
+            {/* <Search 
             search={search}
             handleSearch={handleSearch}
-            />
+            /> */}
         {mappedAuthors}
         </main>
     )
