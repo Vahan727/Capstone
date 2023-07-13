@@ -1,5 +1,7 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
+import {useParams} from 'react-router-dom'
 import NavBar from '../components/NavBar';
+
 
 
 function BookDetail() {
@@ -10,7 +12,7 @@ const {id} = useParams()
 
 useEffect(() => {
     getBook()
-}, [location])
+}, )
 
 
 
