@@ -9,6 +9,7 @@ import Profile from "./pages/Profile"
 
 function App() {
 
+
   return (
     <Router>
       <Switch>
@@ -21,13 +22,16 @@ function App() {
         <Route path="/authors">
           <Authors />
         </Route>
-        <Route path="/author_details">
+        <Route path="/author_details/:id">
           <AuthorDetails />
         </Route>
-        <Route path="/book_details">
+        <Route path="/book_details/:id">
           <BookDetails />
         </Route>
         <Route path="/profile">
+          <Profile />
+        </Route>
+        <Route path="/book_form">
           <Profile />
         </Route>
         {/* <Route path="/signin">

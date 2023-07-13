@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {useParams} from 'react-router-dom'
 import NavBar from '../components/NavBar';
-
+// import BookList from '../components/BookList';
 
 
 function BookDetail() {
@@ -10,18 +10,24 @@ const [book, setBook] = useState()
 
 const {id} = useParams()
 
-useEffect(() => {
-    getBook()
-}, )
-
-
-
 function getBook() {
     fetch(`/api/books/${id}`)
     .then(resp => resp.json())
-    .then(data => setBook(data))
+    .then(data => {
+        console.log(data)
+        setBook(data)
+    })
 }
 
+
+useEffect(() => {
+    getBook()
+}, [])
+
+
+if (!book) {
+    return null
+}
 
 return ( 
     <>
@@ -34,17 +40,15 @@ return (
             <img src={book.image} alt={book.name} />
         </figure>
         <p className="title">  {book.title}</p>
-        <p className="author"> {book.author.name} </p>
-        <figure className="bookAuthorImg">
-            <img src={book.author.image} alt={book.author.name} />
-        </figure>
-        <p className="publicationDate"> {book.publication_date}</p>
+        <p className="author">By: {book.author.name} </p>
+        <p className="publicationDate">Published: {book.publication_date}</p>
         <p className="length">Page Count:  {book.length}</p>
+        <button className="primary" >Add To Favorites</button> 
     </div>
     <section>
-        <ul>
-            <button className="primary" >Add To Favorites</button> 
-        </ul>
+    <figure className="bookAuthorImg">
+            <img src={book.author.image} alt={book.author.name} />
+    </figure>
     </section>
     </>
     );

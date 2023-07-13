@@ -10,7 +10,8 @@ from flask_restful import Resource
 from config import app, db, api
 # from models import User, Recipe
 from models import Author, Book, User, Library
-# Views go here!
+
+# Need to add backend functionality for user's sessions
 
 class OldestBooks(Resource):
     def get(self):

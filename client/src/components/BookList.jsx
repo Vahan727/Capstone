@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import {Link} from 'react-router-dom'
 import BookCard from './BookCard'
 import Search from './Search'
 
@@ -13,6 +14,7 @@ function BookList() {
         fetch(`/api/books`)
         .then(response => response.json())
         .then(data => {
+            console.log(data)
             setBooks(data);
         })
         .catch(error => console.error(error));
@@ -46,6 +48,9 @@ function BookList() {
             search={search}
             handleSearch={handleSearch}
             />
+        <Link to="/book_form">
+        <button>Add a Book</button>
+        </Link>
         {mappedBooks}
         </main>
     )
