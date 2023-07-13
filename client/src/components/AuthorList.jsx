@@ -12,6 +12,7 @@ function AuthorList() {
         fetch(`/api/authors`)
         .then(response => response.json())
         .then(data => {
+            console.log(data);
             setAuthors(data);
         })
         .catch(error => console.error(error));

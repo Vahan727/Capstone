@@ -1,4 +1,5 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
+import {useParams} from 'react-router-dom'
 import NavBar from '../components/NavBar';
 import BookCard from '../components/BookCard';
 
@@ -9,27 +10,33 @@ const [author, setAuthor] = useState()
 
 const {id} = useParams()
 
-useEffect(() => {
-    getAuthor()
-}, [location])
-
-
 
 function getAuthor() {
     fetch(`/api/authors/${id}`)
     .then(resp => resp.json())
-    .then(data => setAuthor(data))
+    .then(data => {
+        console.log(data)
+        setAuthor(data)
+    })
 }
 
-const mappedBooks = author.books_by_author.map((book) => {
-    return (
-        <BookCard 
-            key={book.id}
-            author={book}
-            id={book.id}
-        />
-    )
-})   
+useEffect(() => {
+    getAuthor()
+}, [])
+
+
+// const mappedBooks = author.books_by_author.map((book) => {
+//     return (
+//         <BookCard 
+//             key={book.id}
+//             author={book}
+//             id={book.id}
+//         />
+//     )
+// })   
+if (!author) {
+    return null
+}
 
 return ( 
     <>
@@ -42,9 +49,13 @@ return (
             <img src={author.image} alt={author.name} />
         </figure>
         <p className="name">  {author.name}</p>
-        <p className="birth"> {author.date_of_birth} </p>
+        <p className="birth">Born: {author.date_of_birth} </p>
     </div>
-    {mappedBooks}
+    <div>
+        <h3>Famous Books</h3>
+        {/* {mappedBooks} */}
+    </div>
+    
     <section>
         <ul>
             <button className="primary" >Add To Favorites</button> 
