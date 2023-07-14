@@ -3,7 +3,7 @@
 # Standard library imports
 
 # Remote library imports
-from flask import request
+from flask import Flask, request, session
 from flask_restful import Resource
 
 # Local imports
@@ -12,6 +12,42 @@ from config import app, db, api
 from models import Author, Book, User, Library
 
 # Need to add backend functionality for user's sessions
+
+class SignUp(Resource):
+    def post(self):
+        data = request.get_json()
+        username = data.get('username')
+        email = data.get('email')
+        password = data.get('password')
+
+        user = User(username=username, email=email, password=password)
+        db.session.add(user)
+        db.session.commit()
+
+class SignIn(Resource):
+    def post(self):
+        data = request.get_json()
+        id = data.get('id')
+        username = data.get('username')
+        password = data.get('password')
+
+        user = User.query.filter_by(username=username, password=password).first()
+        if user:
+            session['user_id'] = user.id
+            return {
+                'message': 'User logged in successfully',
+                'user': {
+                    'id': user.id,
+                    'username': user.username,
+                    'password': user.password
+                }
+            }
+        else:
+            return {'message': 'Invalid username or password'}
+
+# class SignOut(Resource):
+#     def delete(self):
+
 
 class OldestBooks(Resource):
     def get(self):
@@ -159,6 +195,8 @@ api.add_resource(Books, "/api/books")
 api.add_resource(BookById,"/api/books/<int:id>")
 api.add_resource(Users, "/api/users")
 api.add_resource(UserById, "/api/users/<int:id>")
+api.add_resource(SignUp, "/api/users/signup")
+api.add_resource(SignIn, "/api/users/signin")
 
 
 if __name__ == '__main__':
