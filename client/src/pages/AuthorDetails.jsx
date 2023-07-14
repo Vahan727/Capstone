@@ -24,16 +24,17 @@ useEffect(() => {
     getAuthor()
 }, [])
 
+const booksByAuthor = author.books_by_author
 
-// const mappedBooks = author.books_by_author.map((book) => {
-//     return (
-//         <BookCard 
-//             key={book.id}
-//             author={book}
-//             id={book.id}
-//         />
-//     )
-// })   
+const mappedBooks = booksByAuthor.map((book) => {
+    return (
+        <BookCard 
+            key={book.id}
+            author={book}
+            id={book.id}
+        />
+    )
+})   
 if (!author) {
     return null
 }
@@ -53,7 +54,7 @@ return (
     </div>
     <div>
         <h3>Famous Books</h3>
-        {/* {mappedBooks} */}
+        {mappedBooks}
     </div>
     
     <section>
