@@ -197,6 +197,7 @@ api.add_resource(Users, "/api/users")
 api.add_resource(UserById, "/api/users/<int:id>")
 api.add_resource(SignUp, "/api/users/signup")
 api.add_resource(SignIn, "/api/users/signin")
+api.add_resource(SignOut, "/api/users/signout")
 
 
 if __name__ == '__main__':
