@@ -38,7 +38,7 @@ function handleOnSubmit(e){
             <input type="text" name="length"  required placeholder="Page Count" value={formData.length} onChange={handleOnChange}/>
             <input type="text" name="publication_date" required placeholder="Publication Date" value={formData.publication_date} onChange={handleOnChange}/>
             <input type="text" name="image" required placeholder="image" value={formData.image} onChange={handleOnChange}/>
-            <button type="submit">Add Shop</button>
+            <button type="submit">Add Book</button>
             </form>
         </div>
     );

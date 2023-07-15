@@ -1,8 +1,8 @@
 import React, { useState, useContext } from 'react';
-// import { UserContext } from '../contexts/UserContext';
+import { UserContext } from '../components/Context';
 
 function SignUp() {
-// const { updateUserState } = useContext(UserContext);
+const { updateUserState } = useContext(UserContext);
 const [username, setUsername] = useState('');
 const [email, setEmail] = useState('');
 const [password, setPassword] = useState('');

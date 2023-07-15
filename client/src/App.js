@@ -32,7 +32,7 @@ function App() {
           <Profile />
         </Route>
         <Route path="/book_form">
-          <Profile />
+          <AddBook />
         </Route>
         {/* <Route path="/signin">
           <SignIn />
