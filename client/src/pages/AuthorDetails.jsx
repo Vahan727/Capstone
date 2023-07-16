@@ -7,7 +7,7 @@ import BookCard from '../components/BookCard';
 function AuthorDetail() {
 
 const [author, setAuthor] = useState()
-
+const [booksByAuthor, setBooksByAuthor] = useState()
 const {id} = useParams()
 
 
@@ -17,26 +17,36 @@ function getAuthor() {
     .then(data => {
         console.log(data)
         setAuthor(data)
+        setBooksByAuthor(data.books_by_author)
     })
+    .catch(error => {
+        console.error('Error retrieving author:', error);
+    });
 }
+
 
 useEffect(() => {
     getAuthor()
 }, [])
 
-const booksByAuthor = author.books_by_author
 
-const mappedBooks = booksByAuthor.map((book) => {
-    return (
-        <BookCard 
-            key={book.id}
-            author={book}
-            id={book.id}
-        />
-    )
-})   
 if (!author) {
     return null
+}
+
+let mappedBooks = null
+
+if (booksByAuthor) {
+    console.log(booksByAuthor)
+    mappedBooks = booksByAuthor.map(book => { 
+        return (
+            <BookCard 
+                key={book.id}
+                book={book}
+                id={book.id}
+            />
+        )
+    })   
 }
 
 return ( 
@@ -53,8 +63,12 @@ return (
         <p className="birth">Born: {author.date_of_birth} </p>
     </div>
     <div>
-        <h3>Famous Books</h3>
-        {mappedBooks}
+        <h3>Books by {author.name}</h3>
+        {mappedBooks ? (
+        <ul>{mappedBooks}</ul>
+        ) : (
+        <p>No books found for this author.</p>
+        )}
     </div>
     
     <section>

@@ -5,10 +5,15 @@ import NavBar from '../components/NavBar';
 
 
 function BookDetail() {
-
 const [book, setBook] = useState()
+// const [showEdit, setShowEdit] = useState(false)
+// function toggleShowEdit() {
+//     setShowEdit(prev => !prev)
+// }
 
 const {id} = useParams()
+
+
 
 function getBook() {
     fetch(`/api/books/${id}`)
