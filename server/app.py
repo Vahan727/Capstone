@@ -27,7 +27,7 @@ class SignUp(Resource):
 class SignIn(Resource):
     def post(self):
         data = request.get_json()
-        id = data.get('id')
+        # id = data.get('id')
         username = data.get('username')
         password = data.get('password')
 
@@ -37,7 +37,7 @@ class SignIn(Resource):
             return {
                 'message': 'User logged in successfully',
                 'user': {
-                    'id': user.id,
+                    # 'id': user.id,
                     'username': user.username,
                     'password': user.password
                 }
@@ -45,14 +45,23 @@ class SignIn(Resource):
         else:
             return {'message': 'Invalid username or password'}
 
-# class SignOut(Resource):
-#     def delete(self):
+class SignOut(Resource):
+    def delete(self):
+        session.pop('user_id', None)
+    
+        return {'message': 'User signed out successfully'}
 
 
 class OldestBooks(Resource):
     def get(self):
-        oldest_books = [o.to_dict() for o in Book.query.order_by(Book.publication_date).limit(5)]
+        oldest_books = [o.to_dict() for o in Book.query.order_by(Book.publication_date).limit(3)]
         return oldest_books, 200
+    
+
+class ShortestBooks(Resource):
+    def get(self):
+        shortest_books = [s.to_dict() for s in Book.query.order_by(Book.length).limit(3)]
+        return shortest_books, 200
 
 class Authors(Resource):
     def get(self):
@@ -189,6 +198,7 @@ class UserById(Resource):
         return ({}, 204)
 
 api.add_resource(OldestBooks, "/api/oldest_books")
+api.add_resource(ShortestBooks, "/api/shortest_books")
 api.add_resource(Authors, "/api/authors")
 api.add_resource(AuthorById, "/api/authors/<int:id>")
 api.add_resource(Books, "/api/books")

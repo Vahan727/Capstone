@@ -123,7 +123,7 @@ class Author(db.Model, SerializerMixin):
     #     "image",
     # )
     serialize_rules = (
-        "-books_by_author.author",
+        "-books_by_author.author.books_by_author",
         "-books_by_author.author_id"
         # "-books_by_author.book_libraries.books",
     )
