@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {useParams} from 'react-router-dom'
+import {useParams, Link} from 'react-router-dom'
 import NavBar from '../components/NavBar';
 // import BookList from '../components/BookList';
 
@@ -48,6 +48,9 @@ return (
         <p className="author">By: {book.author.name} </p>
         <p className="publicationDate">Published: {book.publication_date}</p>
         <p className="length">Page Count:  {book.length}</p>
+        <Link to="/edit_book">
+        <button>Edit Book</button>
+        </Link>
         <button className="primary" >Add To Favorites</button> 
     </div>
     <section>

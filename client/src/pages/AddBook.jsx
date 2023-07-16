@@ -1,5 +1,5 @@
 import React from 'react';
-import BookForm from './BookForm';
+import BookForm from '../components/BookForm';
 import NavBar from '../components/NavBar';
 
 

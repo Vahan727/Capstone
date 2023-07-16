@@ -30,7 +30,7 @@ function handleOnSubmit(e){
 
 
     return (
-        <div className="new-shop-form">
+        <div className="new-book-form">
             <h2>New Book</h2>
             <form onSubmit={(e)=>{handleOnSubmit(e)}}>
             <input type="text" name="name"  required placeholder="Title" value={formData.title} onChange={handleOnChange}/>
