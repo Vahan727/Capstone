@@ -24,36 +24,34 @@ class SignUp(Resource):
     def post(self):
         data = request.get_json()
         new_user = User (
-            username = data.get('username'),
-            email = data.get('email'),
-            password = data.get('password')
+            username = data['username'],
+            email = data['email'],
         )
+        new_user.password_hash = data['password']
         db.session.add(new_user)
         db.session.commit()
         login_user(new_user, remember=True)
-        return new_user.to_dict(), 200
+        return new_user.to_dict(), 201
 
-class SignIn(Resource):
+class Login(Resource):
     def post(self):
-        try:
-            data = request.get_json()
-            user = User.query.filter_by(username = data.get('username')).first()
-            password = request.get_json()['password']
+        data = request.get_json()
+        username = data.get('username')
+        password = data.get('password')
+        user = User.query.filter(User.username == username).first()
+        if user:
+            user.authenticate(password)
+            login_user(user, remember=True)
+            return user.to_dict(), 200
+        else:
+            return{'Invalid Username/Password'}, 401
 
-            if user.authenticate(password):
-                login_user(user, remember=True)
-                return user.to_dict(), 200
-            if not user:
-                return{'Invalid Username/Password'}, 401
-        except:
-            return make_response('Must log in', 401)
-        
 class CheckSession(Resource):
     def get(self):
         try:   
             if current_user.is_authenticated:
                 user = current_user.to_dict()
-                return make_response(user,200)
+                return user, 200
         except:
             return make_response('Not Authorized', 404)
 
@@ -144,7 +142,6 @@ class AuthorById(Resource):
         return book.to_dict(), 202
 
 class Books(Resource):
-    @login_required
     def get(self):
         books = [b.to_dict() for b in Book.query.all()]
         return books, 200
@@ -285,7 +282,7 @@ api.add_resource(BookById,"/api/books/<int:id>")
 api.add_resource(Users, "/api/users")
 api.add_resource(UserById, "/api/users/<int:id>")
 api.add_resource(SignUp, "/api/users/signup")
-api.add_resource(SignIn, "/api/users/signin")
+api.add_resource(Login, "/api/users/login")
 # api.add_resource(SignOut, "/api/users/signout")
 
 

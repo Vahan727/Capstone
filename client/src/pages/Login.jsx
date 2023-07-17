@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-function SignUp() {
+function Login() {
 // const { updateUser } = useContext(UserContext);
 // const [username, setUsername] = useState('');
 // const [password, setPassword] = useState('');
@@ -54,8 +54,8 @@ const body = JSON.stringify({
     ...data
 });
 
-    
-    fetch('/users/signup', {
+
+    fetch('/api/users/login', {
         method: 'POST',
         headers: {
         'Content-Type': 'application/json'
@@ -113,4 +113,4 @@ return (
     );
 }
 
-export default SignUp;
+export default Login;

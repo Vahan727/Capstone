@@ -4,7 +4,7 @@ from sqlalchemy_serializer import SerializerMixin
 from sqlalchemy.ext.hybrid import hybrid_property
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.orm import validates
-# from flask_login import UserMixin
+from flask_login import UserMixin
 from config import db, bcrypt
 import datetime
 
@@ -37,11 +37,11 @@ class Book(db.Model, SerializerMixin):
     )
 
 
-class User(db.Model, SerializerMixin):
+class User(db.Model, SerializerMixin, UserMixin):
     __tablename__ = 'users'
 
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String, unique=True, nullable=False)
+    username = db.Column(db.String, nullable=False)
     email = db.Column(db.String, unique=True, nullable=False)
     _password_hash = db.Column(db.String)
 
@@ -57,17 +57,18 @@ class User(db.Model, SerializerMixin):
     # )
     serialize_rules = (
         "-user_library.user",
-        "-user_library.books"
+        "-user_library.books",
+        "-books"
     )
     
     @validates('username')
     def validate_username(self, key, username):
-        if not username:
+        if not username and len(username) < 1:
             raise ValueError('Must have a username')
-        if len(username) < 6:
-            raise ValueError('Username must be at least 6 characters')
-        if len(username) > 15:
-            raise ValueError('Username is too long')
+        # if len(username) < 6:
+        #     raise ValueError('Username must be at least 6 characters')
+        # if len(username) > 15:
+        #     raise ValueError('Username is too long')
         return username
     
     @validates('email')
@@ -78,7 +79,8 @@ class User(db.Model, SerializerMixin):
     
     @hybrid_property
     def password_hash(self):
-        self._password_hash
+        return Exception('nah bro')
+
 
     @password_hash.setter
     def password_hash(self, password):
@@ -86,7 +88,7 @@ class User(db.Model, SerializerMixin):
         self._password_hash = password_hash.decode('utf-8')    
     
     def authenticate(self, password):
-        return bcrypt.check_password_hash(self._password_hash, password)
+        return bcrypt.check_password_hash(self._password_hash, password.encode('utf-8'))
     
 
 
