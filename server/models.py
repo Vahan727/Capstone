@@ -1,11 +1,11 @@
 from flask_sqlalchemy import SQLAlchemy
 # from sqlalchemy import MetaData, UniqueConstraint
 from sqlalchemy_serializer import SerializerMixin
-# from sqlalchemy.ext.hybrid import hybrid_property
+from sqlalchemy.ext.hybrid import hybrid_property
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.orm import validates
-# from flask_login import UserMixin
-from config import db
+from flask_login import UserMixin
+from config import db, bcrypt
 import datetime
 
 
@@ -37,13 +37,13 @@ class Book(db.Model, SerializerMixin):
     )
 
 
-class User(db.Model, SerializerMixin):
+class User(db.Model, SerializerMixin, UserMixin):
     __tablename__ = 'users'
 
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String, unique=True, nullable=False)
+    username = db.Column(db.String, nullable=False)
     email = db.Column(db.String, unique=True, nullable=False)
-    password = db.Column(db.String)
+    _password_hash = db.Column(db.String)
 
     user_library = db.relationship("Library", back_populates="user")
     books = association_proxy("user_library", "books")
@@ -57,33 +57,40 @@ class User(db.Model, SerializerMixin):
     # )
     serialize_rules = (
         "-user_library.user",
-        "-user_library.books"
+        # "-user_library.books",
+        # "-books"
     )
-
+    
     @validates('username')
-    def validates_username(self, key, username):
-        if not username and len(username) <= 5:
-            raise ValueError('Invalid Username')
+    def validate_username(self, key, username):
+        if not username and len(username) < 1:
+            raise ValueError('Must have a username')
+        # if len(username) < 6:
+        #     raise ValueError('Username must be at least 6 characters')
+        # if len(username) > 15:
+        #     raise ValueError('Username is too long')
         return username
-    # @validates('email')
-    # def validates_email(self, key, email):
-    #     if not re.match(r"[^@]+@[^@]+\.[^@]+", email):
-    #         raise ValueError('Invalid Email')
-    #     return email
+    
+    @validates('email')
+    def validate_email(self, key, address):
+        if '@' not in address:
+            raise ValueError('Invalid email!')
+        return address
+    
+    @hybrid_property
+    def password_hash(self):
+        return Exception('nah bro')
 
-    # @hybrid_property
-    # def password_hash(self):
-    #     raise Exception('Invalid Password.')
 
-    # @password_hash.setter
-    # def password_hash(self, password):
-    #     password_hash = bcrypt.generate_password_hash(
-    #         password.encode('utf-8'))
-    #     self._password_hash = password_hash.decode('utf-8')
+    @password_hash.setter
+    def password_hash(self, password):
+        password_hash = bcrypt.generate_password_hash(password.encode('utf-8'))
+        self._password_hash = password_hash.decode('utf-8')    
+    
+    def authenticate(self, password):
+        return bcrypt.check_password_hash(self._password_hash, password.encode('utf-8'))
+    
 
-    # def auth(self, password):
-    #     return bcrypt.check_password_hash(
-    #         self._password_hash, password.encode('utf-8'))
 
 class Library(db.Model, SerializerMixin):
     __tablename__ = 'library'

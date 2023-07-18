@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {useParams} from 'react-router-dom'
+import {useParams, Link} from 'react-router-dom'
 import NavBar from '../components/NavBar';
 // import BookList from '../components/BookList';
 
@@ -13,7 +13,16 @@ const [book, setBook] = useState()
 
 const {id} = useParams()
 
-
+function favoriteBook() {
+    fetch(`/api/libraries`, {
+        method:"POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(book)
+    })
+    .then(res => res.json())
+}
 
 function getBook() {
     fetch(`/api/books/${id}`)
@@ -48,7 +57,10 @@ return (
         <p className="author">By: {book.author.name} </p>
         <p className="publicationDate">Published: {book.publication_date}</p>
         <p className="length">Page Count:  {book.length}</p>
-        <button className="primary" >Add To Favorites</button> 
+        <Link to="/edit_book">
+        <button>Edit Book</button>
+        </Link>
+        <button className="primary" onClick={favoriteBook}>Add To Favorites</button> 
     </div>
     <section>
     <figure className="bookAuthorImg">

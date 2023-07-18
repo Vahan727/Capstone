@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import NavBar from '../components/NavBar';
 import BookCard from '../components/BookCard';
-
+import {Link} from 'react-router-dom'
 
 function Home() {
 const [oldestBooks, setOldestBooks] = useState([])
@@ -59,6 +59,9 @@ const mappedShortestBooks = shortestBooks.map((book) => {
         <div>
         <NavBar />
         <h2>Librarified</h2>
+        <Link to={`/process`}>
+        <button className="primary" >Login/Signup</button>
+        </Link> 
         <h3>Check out some of our Oldest Books</h3>
         {mappedOldestBooks}
         <h3>Check out some of our Shortest Books</h3>

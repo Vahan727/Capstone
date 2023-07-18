@@ -7,9 +7,10 @@ if __name__ == '__main__':
 
         # clear tables of current data
         print("Clearing all tables...")
-        # User.query.delete()
+        User.query.delete()
         Book.query.delete()
         Author.query.delete()
+        Library.query.delete()
 
         # seed books table
         print("Seeding books table...")
@@ -236,29 +237,96 @@ if __name__ == '__main__':
                 id = 1,
                 username = 'Vahan727',
                 email = 'vahan@gmail.com',
-                password = 'Password1'
+                _password_hash = 'Password1'
             ),
             User (
                 id = 2, 
                 username = 'User123',
                 email = 'fake@gmail.com',
-                password = 'Password2'
+                _password_hash = 'Password2'
             ),
             User (
                 id = 3, 
                 username = 'User456',
                 email = 'another@gmail.com',
-                password = 'Password3'
+                _password_hash = 'Password3'
             ),
             User (
                 id = 4, 
                 username = 'User789',
                 email = 'definitely@gmail.com',
-                password = 'Password4'
+                _password_hash = 'Password4'
             )
         ]
 
         db.session.add_all(seed_users)
+
+        print("Seeding library table...")
+
+        seed_library = [
+            Library (
+                id = 1,
+                book_id = 2,
+                user_id = 1,
+            ),
+            Library (
+                id = 2,
+                book_id = 1,
+                user_id = 3,
+            ),
+            Library (
+                id = 3,
+                book_id = 4,
+                user_id = 2,
+            ),
+            Library (
+                id = 4,
+                book_id = 8,
+                user_id = 4,
+            ),
+            Library (
+                id = 5,
+                book_id = 11,
+                user_id = 1,
+            ),
+            Library (
+                id = 6,
+                book_id = 15,
+                user_id = 2,
+            ),
+            Library (
+                id = 7,
+                book_id = 13,
+                user_id = 3,
+            ),
+            Library (
+                id = 8,
+                book_id = 16,
+                user_id = 4,
+            ),
+            Library (
+                id = 9,
+                book_id = 19,
+                user_id = 1,
+            ),
+            Library (
+                id = 10,
+                book_id = 7,
+                user_id = 3
+            ),
+            Library (
+                id = 11,
+                book_id = 3,
+                user_id = 1
+            ),
+            Library (
+                id = 12,
+                book_id = 8,
+                user_id = 2
+            ),
+        ]
+
+        db.session.add_all(seed_library)
 
         db.session.commit()
 

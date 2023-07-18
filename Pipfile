@@ -13,6 +13,8 @@ flask-cors = "*"
 bcrypt = "*"
 honcho = "*"
 gunicorn = "*"
+flask-login = "*"
+flask-bcrypt = "*"
 
 [dev-packages]
 
