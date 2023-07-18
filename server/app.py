@@ -154,7 +154,7 @@ class Books(Resource):
                 title = data.get("title"),
                 length = data.get("length"),
                 publication_date = data.get("publication_date"),
-                author_id = data.get("author_id"),
+                image = data.get("image"),
             )
             db.session.add(new_book)
             db.session.commit()
