@@ -24,7 +24,7 @@ function handleOnSubmit(e){
         body: JSON.stringify(formData)
     })
     .then(res=>res.json())
-    .then(()=>history.push("/"))
+    .then(()=>history.push("/books"))
     setFormData(formOutline)
 }
 

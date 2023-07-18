@@ -13,7 +13,16 @@ const [book, setBook] = useState()
 
 const {id} = useParams()
 
-
+function favoriteBook() {
+    fetch(`/api/libraries`, {
+        method:"POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(book)
+    })
+    .then(res => res.json())
+}
 
 function getBook() {
     fetch(`/api/books/${id}`)
@@ -51,7 +60,7 @@ return (
         <Link to="/edit_book">
         <button>Edit Book</button>
         </Link>
-        <button className="primary" >Add To Favorites</button> 
+        <button className="primary" onClick={favoriteBook}>Add To Favorites</button> 
     </div>
     <section>
     <figure className="bookAuthorImg">

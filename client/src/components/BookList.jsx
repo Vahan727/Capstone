@@ -48,7 +48,7 @@ function BookList() {
             search={search}
             handleSearch={handleSearch}
             />
-        <Link to="/book_form">
+        <Link to="/add_book">
         <button>Add a Book</button>
         </Link>
         {mappedBooks}

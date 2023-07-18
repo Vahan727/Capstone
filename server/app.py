@@ -47,13 +47,14 @@ class Login(Resource):
             return{'Invalid Username/Password'}, 401
 
 class CheckSession(Resource):
-    def get(self):
-        try:   
+    def get(self):   
+        try:
             if current_user.is_authenticated:
                 user = current_user.to_dict()
                 return user, 200
         except:
-            return make_response('Not Authorized', 404)
+            return {'Error': "Unauthorized User"}, 401
+
 
 @app.route("/api/signout", methods=["POST"]) 
 @login_required 
@@ -95,18 +96,17 @@ class OldestBooks(Resource):
     
 
 class ShortestBooks(Resource):
-    @login_required
     def get(self):
         shortest_books = [s.to_dict() for s in Book.query.order_by(Book.length).limit(3)]
         return shortest_books, 200
 
 class Authors(Resource):
-    @login_required
+    # @login_required
     def get(self):
         authors = [a.to_dict() for a in Author.query.all()]
         return authors, 200
     
-    @login_required
+    # @login_required
     def post(self):
         data = request.get_json()
         try:
@@ -121,7 +121,7 @@ class Authors(Resource):
             return ({"error": "400: Validation error"}, 400)
 
 class AuthorById(Resource):
-    @login_required
+    # @login_required
     def get(self, id):
         try:
             author = Author.query.filter(Author.id == id).first()
@@ -129,7 +129,7 @@ class AuthorById(Resource):
         except:
             return ({"error": "400: Validation error"}, 400)
     
-    @login_required
+    # @login_required
     def patch(self, id):
         data = request.get_json()
         book = Book.query.filter(Book.id == id).first()
@@ -146,7 +146,7 @@ class Books(Resource):
         books = [b.to_dict() for b in Book.query.all()]
         return books, 200
     
-    @login_required
+    # @login_required
     def post(self):
         data = request.get_json()
         try:
@@ -163,7 +163,7 @@ class Books(Resource):
             return ({"error": "400: Validation error"}, 400)
     
 class BookById(Resource):
-    @login_required
+    # @login_required
     def get(self, id):
         try:
             book = Book.query.filter(Book.id == id).first()
@@ -171,7 +171,7 @@ class BookById(Resource):
         except:
             return ({"error": "400: Validation error"}, 400)
     
-    @login_required
+    # @login_required
     def patch(self, id):
         data = request.get_json()
         book = Book.query.filter(Book.id == id).first()
@@ -184,7 +184,7 @@ class BookById(Resource):
         db.session.commit()
         return book.to_dict(), 202
     
-    @login_required
+    # @login_required
     def delete(self, id):
         book = Book.query.filter(Book.id == id).first()
         if not book:
@@ -195,12 +195,12 @@ class BookById(Resource):
     
 
 class Users(Resource):
-    @login_required
+    # @login_required
     def get(self):
         users = [u.to_dict() for u in User.query.all()]
         return users, 200
     
-    @login_required
+    # @login_required
     def post(self):
         data = request.get_json()
         try:
@@ -217,7 +217,7 @@ class Users(Resource):
             return ({"error": "400: Validation error"}, 400)
 
 class UserById(Resource):
-    @login_required
+    # @login_required
     def get(self, id):
         try:
             user = User.query.filter(User.id == id).first()
@@ -225,7 +225,7 @@ class UserById(Resource):
         except:
             return ({"error": "400: Validation error"}, 400)
         
-    @login_required
+    # @login_required
     def patch(self, id):
         data = request.get_json()
         user = User.query.filter(User.id == id).first()
@@ -238,7 +238,7 @@ class UserById(Resource):
         db.session.commit()
         return user.to_dict(), 202
     
-    @login_required
+    # @login_required
     def delete(self, id):
         user = User.query.filter(User.id == id).first()
         if not user:
@@ -248,12 +248,12 @@ class UserById(Resource):
         return ({}, 204)
     
 class Libraries(Resource):
-    @login_required
+    # @login_required
     def get(self):
         libraries = [l.to_dict() for l in Library.query.all()]
         return libraries, 200
     
-    @login_required
+    # @login_required
     def post(self):
         data = request.get_json()
         user = current_user
@@ -270,8 +270,17 @@ class Libraries(Resource):
 
             return make_response(new_library.to_dict(), 200)    
 
+
+# class LibraryByUserId(Resource):
+    # @login_required
+#     def get(self, id):
+#         libraries = [l.to_dict() for l in Library.query.filter(User.id == id)]
+#         return libraries, 200
+
+
 api.add_resource(CheckSession, "/api/check_session")
 api.add_resource(Libraries, "/api/libraries")
+# api.add_resource(LibraryByUserId, "/api/libraries/<int:id>")
 api.add_resource(CurrentUser, "/api/current_user")
 api.add_resource(OldestBooks, "/api/oldest_books")
 api.add_resource(ShortestBooks, "/api/shortest_books")

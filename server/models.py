@@ -57,8 +57,8 @@ class User(db.Model, SerializerMixin, UserMixin):
     # )
     serialize_rules = (
         "-user_library.user",
-        "-user_library.books",
-        "-books"
+        # "-user_library.books",
+        # "-books"
     )
     
     @validates('username')

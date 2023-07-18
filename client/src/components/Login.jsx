@@ -1,39 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState} from 'react';
+// import UserContext from "../Context"
+import {useHistory} from "react-router-dom"
+import {useFormik} from "formik"
+import * as yup from "yup"
 
-function Login() {
-// const { updateUser } = useContext(UserContext);
-// const [username, setUsername] = useState('');
-// const [password, setPassword] = useState('');
-// const history = useHistory()
-
-// const handleUsernameChange = (event) => {
-//     setUsername(event.target.value);
-// };
-
-// const handlePasswordChange = (event) => {
-//     setPassword(event.target.value);
-// };
-
-// const handleSubmit = (event) => {
-//     event.preventDefault();
-//     fetch('/api/users/signin', {
-//         method: 'POST',
-//         body: JSON.stringify({ username, email, password }),
-//         headers: {
-//             'Content-Type': 'application/json'
-//         }
-//         })
-//         .then(response => response.json())
-//         .then((user) => {
-//             updateUser(user);
-//             history.push("/");
-//         })
-//         .catch((err) => console.error(err));
-// };;
+function Login({updateUser}) {
+const history = useHistory()
 const [data, setData] = useState({
     id: '',
     username: '',
-    email: '',
     password: '',
 });
 
@@ -63,13 +38,17 @@ const body = JSON.stringify({
         body: body
     })
     .then(response => response.json())
-    .then(data => {
-        console.log(data)
+    .then(user => {
+        console.log(user)
+        // setUser(user)
+        
         setData({
             username: '',
             email: '',
             password: '',
         });
+        updateUser(user)
+        history.push("/")
     })
     .catch(error => {
         console.error('Error:', error);
@@ -78,7 +57,7 @@ const body = JSON.stringify({
 
 return (
     <div>
-        <h2>Sign Up</h2>
+        {/* <h2>Login</h2> */}
         <form onSubmit={handleSubmit}>
         <div>
         <label htmlFor="username">Username:</label>
@@ -89,7 +68,7 @@ return (
             onChange={handleChange}
         />
         </div>
-        <div>
+        {/* <div>
         <label htmlFor="email">Email:</label>
         <input
             type="email"
@@ -97,7 +76,7 @@ return (
             value={data.email}
             onChange={handleChange}
         />
-        </div>
+        </div> */}
         <div>
         <label htmlFor="password">Password:</label>
         <input
@@ -107,7 +86,7 @@ return (
             onChange={handleChange}
             />
         </div>
-        <button type="submit">Register</button>
+        <button type="submit">Login</button>
         </form>
     </div>
     );

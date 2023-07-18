@@ -58,7 +58,7 @@ const handleSubmit = (event) => {
 
 return (
     <div>
-        <h2>Sign Up</h2>
+        {/* <h2>Sign Up</h2> */}
         <form onSubmit={handleSubmit}>
         <div>
         <label htmlFor="username">Username:</label>
