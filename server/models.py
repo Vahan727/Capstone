@@ -15,8 +15,8 @@ class Book(db.Model, SerializerMixin):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String, nullable=False)
     length = db.Column(db.Integer, nullable=False)
-    publication_date = db.Column(db.String, nullable=False)
-    image = db.Column(db.String, nullable=False)
+    publication_date = db.Column(db.Integer, nullable=False)
+    image = db.Column(db.String)
 
     author_id = db.Column(db.Integer, db.ForeignKey('authors.id'))
     author = db.relationship('Author', back_populates='books_by_author')

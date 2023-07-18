@@ -8,7 +8,7 @@ return (
     <ul className="card">
     <img src={book.image} alt={book.title} />
     <h4>{book.title}</h4>
-    <p>By: {book.author.name}</p>
+    {book.author ? <p>By: {book.author.name}</p> : null}
     <Link to={`/book_details/${book.id}`}>
     <button className="primary" >Book Details</button>
     </Link> 

@@ -29,6 +29,26 @@ function handleDelete() {
         });
 }
 
+// function handleLogout() {
+//     fetch(`api/users/signout`, {
+//     method: "POST",
+//     headers: {
+//         'Content-Type': 'application/json'
+//     }
+//     })
+//     .then((response) => {
+//         if (response.ok) {
+//             updateUser(null);
+//             history.push("/process")
+//         } else {
+//             throw new Error("Error logging out")
+//         }
+//     })
+//     .catch((error) => {
+//     console.error(error);
+//     })
+// }
+
 // const userLibrary = user.user_library
 
 // const favoriteBooks = userLibrary.map((book) => {
@@ -50,6 +70,7 @@ function handleDelete() {
         <h3>{user.email}</h3>
         {/* <h3>Favorite Books</h3>
         {favoriteBooks} */}
+        {/* <button className="primary" onClick={handleLogout}>Logout</button>  */}
         <button onClick={handleDelete}>Delete User</button>
         </div>
     );

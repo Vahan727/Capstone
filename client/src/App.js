@@ -122,7 +122,7 @@ if (!user) {
         <Route path="/book_details/:id" ><BookDetails/></Route>
         <Route path="/profile" ><Profile updateUser={updateUser} user={user}/></Route>
         <Route path="/add_book" ><AddBook/></Route>
-        <Route path="/edit_book" ><EditBook/></Route>
+        <Route path="/edit_book/:id" ><EditBook/></Route>
         <Route path="/process" ><Process updateUser={updateUser}/></Route>
         <Route path="/signout" ><SignOut/></Route>
         <Route exact path="/" ><Home/></Route>
