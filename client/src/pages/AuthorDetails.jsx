@@ -70,12 +70,6 @@ return (
         <p>No books found for this author.</p>
         )}
     </div>
-    
-    <section>
-        <ul>
-            <button className="primary" >Add To Favorites</button> 
-        </ul>
-    </section>
     </>
     );
 }
