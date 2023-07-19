@@ -1,5 +1,6 @@
 import React from 'react';
 import {Link} from "react-router-dom"
+import Button from 'react-bootstrap/Button';
 
 
 function NavBar() {
@@ -7,7 +8,8 @@ function NavBar() {
         <nav>
         <ul>
             <Link to="/">
-                <button className="primary">Librarified</button>
+                {/* <button className="primary">Librarified</button> */}
+                <Button className="primary">Librarified</Button>
             </Link>
             <Link to="/books">
                 <button className="primary">Books</button>
