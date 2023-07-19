@@ -58,7 +58,8 @@ const mappedShortestBooks = shortestBooks.map((book) => {
         <main>
         <div>
         <NavBar />
-        <h2>Librarified</h2>
+        <h2>Librarified </h2>
+        <h2>Timeless Books and Timeless Authors</h2>
         <h3>Check out some of our Oldest Books</h3>
         {mappedOldestBooks}
         <h3>Check out some of our Shortest Books</h3>

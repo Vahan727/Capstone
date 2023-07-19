@@ -19,11 +19,17 @@ function getBook() {
     })
 }
 
-
 useEffect(() => {
     getBook()
 }, [])
 
+// const bookData = {
+//         title: book.title,
+//         length: book.length,
+//         publication_date: book.publication_date,
+//         image: book.image, 
+//     }     
+// console.log(bookData)
 
 const schema = yup.object().shape({
     title: yup.string().required("required"),
@@ -37,7 +43,7 @@ const formik = useFormik({
         title: "",
         length: 0,
         publication_date: 0,
-        image: "",
+        image: "", 
     },
     validationSchema: schema,
     onSubmit: (values) => {

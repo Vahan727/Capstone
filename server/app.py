@@ -56,18 +56,21 @@ class CheckSession(Resource):
             return {'Error': "Unauthorized User"}, 401
 
 
-@app.route("/api/signout", methods=["POST"]) 
-@login_required 
+@app.route("/api/signout", methods=["GET"]) 
+# @login_required 
 def logout():
     logout_user() 
     return f'Logout Successful'
-# Working
+# # Working
+
+
 # class SignOut(Resource):
-#     @login_required
-#     def post(self):
+#     # @login_required
+#     def delete(self):
 #         session['user_id'] = None
 #         return make_response('User signed out successfully', 204)
-    
+
+# api.add_resource(SignOut, "/api/users/signout")
 
 class CurrentUser(Resource):
     def get(self, username):
@@ -292,7 +295,7 @@ api.add_resource(Users, "/api/users")
 api.add_resource(UserById, "/api/users/<int:id>")
 api.add_resource(SignUp, "/api/users/signup")
 api.add_resource(Login, "/api/users/login")
-# api.add_resource(SignOut, "/api/users/signout")
+
 
 
 if __name__ == '__main__':
