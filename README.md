@@ -1,11 +1,11 @@
 # Librarified
 
-Librarified is a hypothetical book store. On the site you will be able to view books from different authors and genres. 
+Librarified is a book collection website. On the site you will be able to view books from different authors. 
 
 # User Stories
-1. User will be able to browse through books based on different categories
-3. User will be able to browse through authors based on different categories
-4. User will be able to write reviews for a book
+1. User will be able to browse through books 
+3. User will be able to browse through authors 
+4. User will be able to add, edit and delete books of their choice
 
 # Stretch Goals
 1. User will be able to favorite books and see their favorites on their profile
@@ -53,7 +53,12 @@ Librarified is a hypothetical book store. On the site you will be able to view b
 | /authors      | Authors.jsx         |
 | /authors/{id} | Authors-Details.jsx |
 | /profile      | Profile.jsx         |
-| /about        | About.jsx           |
+| /add_book     | AddBook.jsx         |
+|/edit_book/{id}| EditBook.jsx        |
+| /process      | SignUp-Login.jsx    |
+
+
+
 
 # React Tree
 
