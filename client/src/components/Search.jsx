@@ -4,7 +4,7 @@ function Search({search, handleSearch}){
 
     return (
         <div className="searchbar">
-            <label htmlFor="search">Search by Book Title or Author: </label>
+            <label htmlFor="search">Search by Book Title: </label>
             <input
             type="text"
             id="search"

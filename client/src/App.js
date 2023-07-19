@@ -102,7 +102,6 @@ if (!user) {
   )
 }
 
-
   return (
     <Router>
       <Switch>

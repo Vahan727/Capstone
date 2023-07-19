@@ -9,29 +9,38 @@ function Profile({user, updateUser}) {
 const history = useHistory()
 
 
-function handleDelete() {
-    fetch(`/api/users`, {
-        method: "DELETE",
-        headers: {
-            "Content-Type": "application/json",
-        },
-    })
-        .then((response) => {
-            if (response.ok) {
+// function handleDelete() {
+//     fetch(`/api/users`, {
+//         method: "DELETE",
+//         headers: {
+//             "Content-Type": "application/json",
+//         },
+//     })
+//         .then((response) => {
+//             if (response.ok) {
+//             updateUser(null);
+//             history.push("/");
+//             } else {
+//             throw new Error("Error confirming delete");
+//             }
+//         })
+//         .catch((error) => {
+//         console.error(error);
+//         });
+// }
+
+function handleLogout() {
+    fetch("/api/signout").then((res) => {
+        if (res.ok){
             updateUser(null);
-            history.push("/");
-            } else {
-            throw new Error("Error confirming delete");
-            }
-        })
-        .catch((error) => {
-        console.error(error);
-        });
+            history.push("/process");
+        }
+    });
 }
 
 // function handleLogout() {
-//     fetch(`api/users/signout`, {
-//     method: "POST",
+//     fetch(`/api/users/signout`, {
+//     method: "DELETE",
 //     headers: {
 //         'Content-Type': 'application/json'
 //     }
@@ -70,8 +79,8 @@ function handleDelete() {
         <h3>{user.email}</h3>
         {/* <h3>Favorite Books</h3>
         {favoriteBooks} */}
-        {/* <button className="primary" onClick={handleLogout}>Logout</button>  */}
-        <button onClick={handleDelete}>Delete User</button>
+        <button className="primary" onClick={handleLogout}>Logout</button> 
+        {/* <button onClick={handleDelete}>Delete User</button> */}
         </div>
     );
 }

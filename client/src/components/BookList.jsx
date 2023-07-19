@@ -27,9 +27,15 @@ function BookList() {
     }
 
     const filteredBooks = [...books].filter((el) => {
+        // if (el.author) {  
         return (
-            el.title.toLowerCase().includes(search.toLowerCase()) || el.author.name.toLowerCase().includes(search.toLowerCase())
+            // el.title.toLowerCase().includes(search.toLowerCase()) || el.author.name.toLowerCase().includes(search.toLowerCase())
+            el.title.toLowerCase().includes(search.toLowerCase())
         )
+    // }
+    //     else {
+    //         el.title.toLowerCase().includes(search.toLowerCase())
+    //     }
     })
 
     const mappedBooks = filteredBooks.map((book) => {
