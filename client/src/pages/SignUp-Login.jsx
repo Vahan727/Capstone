@@ -156,6 +156,7 @@ const [signup, setSignup] = useState(true);
 						actions.resetForm();
 						updateUser(data);
 						history.push("/");
+                        window.location.reload();
 					});
 				} 
                 else {
