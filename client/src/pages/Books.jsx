@@ -7,7 +7,9 @@ function Books() {
     return (
         <div>
         <NavBar />
-        <h2>Books</h2>
+        <div className="info-heading">
+            <h2 className="info-title">Books</h2>
+        </div>
         <BookList />
         </div>
     );

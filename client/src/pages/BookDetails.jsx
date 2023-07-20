@@ -2,6 +2,8 @@ import React, {useState, useEffect} from 'react';
 import {useParams, Link, useHistory} from 'react-router-dom'
 import NavBar from '../components/NavBar';
 // import BookList from '../components/BookList';
+import Button from 'react-bootstrap/Button';
+import AuthorCard from '../components/AuthorCard';
 
 
 function BookDetail() {
@@ -63,35 +65,71 @@ if (!book) {
     return null
 }
 
-return ( 
+// return ( 
+//     <>
+//     <div>
+//     <NavBar />
+//     <h2>Book Details</h2>
+//     </div>
+//     <div className="detailsContainer" >
+//         <figure className="bookImg">
+//             <img src={book.image} alt={book.title} />
+//         </figure>
+//         <p className="title">  {book.title}</p>
+//         {book.author ? <p className="author">By: {book.author.name} </p> : null}
+//         <p className="publicationDate">Published: {book.publication_date}</p>
+//         <p className="length">Page Count:  {book.length}</p>
+//         <Link to={`/edit_book/${book.id}`}>
+//         <Button className="primary navbar-button" >Edit Book</Button>
+//         </Link>
+//         <Button className="primary navbar-button" onClick={handleDelete}>Delete Book</Button> 
+//     </div>
+//     <section>
+//     {
+//     book.author ? 
+//     <figure className="bookAuthorImg">
+//             <img src={book.author.image} alt={book.title} />
+//     </figure> : null
+//     }
+//     </section>
+//     </>
+//     );
+
+return (
     <>
-    <div>
-    <NavBar />
-    <h2>Book Details</h2>
-    </div>
-    <div className="detailsContainer" >
-        <figure className="bookImg">
-            <img src={book.image} alt={book.title} />
-        </figure>
-        <p className="title">  {book.title}</p>
-        {book.author ? <p className="author">By: {book.author.name} </p> : null}
-        <p className="publicationDate">Published: {book.publication_date}</p>
-        <p className="length">Page Count:  {book.length}</p>
-        <Link to={`/edit_book/${book.id}`}>
-        <button>Edit Book</button>
-        </Link>
-        <button className="primary" onClick={handleDelete}>Delete Book</button> 
-    </div>
-    <section>
-    {
-    book.author ? 
-    <figure className="bookAuthorImg">
-            <img src={book.author.image} alt={book.title} />
-    </figure> : null
-    }
-    </section>
+        <div className="book-detail-page">
+            <NavBar />
+            <div className="book-details">
+            <h2>Book Details</h2>
+            <div className="book-content">
+                <figure className="book-img">
+                <img src={book.image} alt={book.title} />
+                </figure>
+                <div className="book-info">
+                <p className="title">{book.title}</p>
+                {book.author ? <p className="author">By: {book.author.name} </p> : null}
+                <p className="publication-date">Published: {book.publication_date}</p>
+                <p className="length">Page Count: {book.length}</p>
+                <div className="buttons-container">
+                    <Link to={`/edit_book/${book.id}`}>
+                    <Button className="primary navbar-button">Edit Book</Button>
+                    </Link>
+                    <Button className="primary navbar-button" onClick={handleDelete}>
+                    Delete Book
+                    </Button>
+                </div>
+                </div>
+            </div>
+            {book.author && (
+            <div className="author-card">
+                <AuthorCard author={book.author} />
+            </div>
+            )}
+            </div>
+        </div>
     </>
-    );
+);
+
 }
 
 export default BookDetail;

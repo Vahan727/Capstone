@@ -166,9 +166,10 @@ const [signup, setSignup] = useState(true);
 	});
 
 	return (
-		<section>
+		<section className="book-form-container">
 			{signup ? (
 				<form className="form" onSubmit={formik.handleSubmit}>
+                <div className="form-group">
 					<label>Email</label>
 					<input
 						type="text"
@@ -177,6 +178,8 @@ const [signup, setSignup] = useState(true);
 						onChange={formik.handleChange}
 						onBlur={formik.handleBlur}
 					/>
+                </div>
+                <div className="form-group">
 					<label>Username</label>
 					<input
 						type="text"
@@ -185,6 +188,7 @@ const [signup, setSignup] = useState(true);
 						onChange={formik.handleChange}
 						onBlur={formik.handleBlur}
 					/>
+                </div>
 					{/* formik.touched is enabled with onBlur */}
 					{/* 
 						1. onBlur events - toggles formik.touched
@@ -195,8 +199,8 @@ const [signup, setSignup] = useState(true);
 					) : (
 						""
 					)}
+                <div className="form-group">
 					<label>Password</label>
-
 					<input
 						type="password"
 						name="password"
@@ -204,12 +208,13 @@ const [signup, setSignup] = useState(true);
 						onChange={formik.handleChange}
 						onBlur={formik.handleBlur}
 					/>
+                </div>
 					{formik.touched.password && formik.errors.password ? (
 						<h3>{formik.errors.password}</h3>
 					) : (
 						""
 					)}
-					<input type="submit" value="Sign Up" className="button" />
+					<input type="submit" value="Sign Up" className="button submit-btn" />
 				</form>
 			) : (
 				<form className="form" onSubmit={formik.handleSubmit}>
@@ -241,12 +246,12 @@ const [signup, setSignup] = useState(true);
 					) : (
 						""
 					)}
-					<input type="submit" value="Log In" className="button" />
+					<input type="submit" value="Log In" className="button submit-btn" />
 				</form>
 			)}
 			<section>
 				<p>{signup ? "Already have an account?" : "Not a member?"}</p>
-				<button className="button" onClick={toggleSignup}>
+				<button className="button submit-btn" onClick={toggleSignup}>
 					{signup ? "Login" : "Sign Up"}
 				</button>
 			</section>

@@ -7,7 +7,9 @@ function Authors() {
     return (
         <div>
         <NavBar />
-        <h2>Authors</h2>
+        <div className="info-heading">
+            <h2 className="info-title">Authors</h2>
+        </div>
         <AuthorList />
         </div>
     );

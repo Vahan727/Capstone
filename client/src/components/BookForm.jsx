@@ -78,8 +78,9 @@ const formik = useFormik({
         //     <button type="submit">Add Book</button>
         //     </form>
         // </div>
-        <section>
+        <section className="book-form-container">
 			<form onSubmit={formik.handleSubmit} className="form">
+            <div className="form-group">
 				<label>Title </label>
 				<input
 					type="text"
@@ -93,7 +94,8 @@ const formik = useFormik({
 				) : (
 					""
 				)}
-
+            </div>
+            <div className="form-group">
 				<label>Page Count</label>
 				<input
 					type="number"
@@ -107,7 +109,8 @@ const formik = useFormik({
 				) : (
 					""
 				)}
-
+            </div>
+            <div className="form-group">
 				<label>Publication Year</label>
 				<input
 					type="number"
@@ -121,7 +124,8 @@ const formik = useFormik({
 				) : (
 					""
 				)}
-
+            </div>
+            <div className="form-group">
                 <label> Image </label>
 				<input
 					type="text"
@@ -130,7 +134,8 @@ const formik = useFormik({
 					onChange={formik.handleChange}
 					onBlur={formik.handleBlur}
 				/>
-				<input className="button" type="submit" />
+				<input className="button submit-btn" type="submit" />
+            </div>
 			</form>
 		</section>
     );
