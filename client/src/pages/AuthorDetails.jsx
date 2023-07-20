@@ -2,6 +2,8 @@ import React, {useState, useEffect} from 'react';
 import {useParams} from 'react-router-dom'
 import NavBar from '../components/NavBar';
 import BookCard from '../components/BookCard';
+import { Row, Col } from 'react-bootstrap';
+
 
 
 function AuthorDetail() {
@@ -40,11 +42,9 @@ if (booksByAuthor) {
     console.log(booksByAuthor)
     mappedBooks = booksByAuthor.map(book => { 
         return (
-            <BookCard 
-                key={book.id}
-                book={book}
-                id={book.id}
-            />
+            <Col md={4} key={book.id}>
+            <BookCard book={book} />
+            </Col>
         )
     })   
 }
@@ -53,19 +53,21 @@ return (
     <>
     <div>
     <NavBar />
-    <h2>Author Details</h2>
+    <h2 className="author-title">Author Details</h2>
     </div>
-    <div className="detailsContainer" >
-        <figure className="bookImg">
-            <img src={author.image} alt={author.name} />
-        </figure>
-        <p className="name">  {author.name}</p>
-        <p className="birth">Born: {author.date_of_birth} </p>
+    <div className="center-image">
+        {/* <figure style={{justifyContent: "center"}}> */}
+        <img src={author.image} alt={author.name} className="image-container"/>
+        {/* </figure> */}
+    </div>
+    <div>
+        <p className="author-details">  {author.name}</p>
+        <p className="author-details">Born: {author.date_of_birth} </p>
     </div>
     <div>
         <h3>Books by {author.name}</h3>
         {mappedBooks ? (
-        <ul>{mappedBooks}</ul>
+        <Row>{mappedBooks}</Row>
         ) : (
         <p>No books found for this author.</p>
         )}

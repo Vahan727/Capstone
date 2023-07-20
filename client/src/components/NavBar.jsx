@@ -5,39 +5,20 @@ import Button from 'react-bootstrap/Button';
 
 function NavBar() {
     return (
-        <nav>
+        <nav className="navbar-container">
         <ul>
             <Link to="/">
-                {/* <button className="primary">Librarified</button> */}
-                <Button className="primary">Librarified</Button>
+                <Button className="primary navbar-button">Librarified</Button>
             </Link>
             <Link to="/books">
-                <button className="primary">Books</button>
+                <Button className="primary navbar-button">Books</Button>
             </Link>
             <Link to="/authors">
-                <button className="primary">Authors</button>
+                <Button className="primary navbar-button">Authors</Button>
             </Link>
             <Link to="/profile">
-                <button className="primary">Profile</button>
+                <Button className="primary navbar-button">Profile</Button>
             </Link>
-            {/* <Link to="/process">
-                <button className="primary" >Logout</button>
-            </Link>  */}
-            {/* <li>
-            <a href="/">Librarified</a>
-            </li>
-            <li>
-            <a href="/books">Books</a>
-            </li>
-            <li>
-            <a href="/authors">Authors</a>
-            </li>
-            <li>
-            <a href="/profile">Profile</a>
-            </li> */}
-            {/* <li>
-            <a href="/signin">Sign In/Sign Out</a>
-            </li> */}
         </ul>
         </nav>
     );
